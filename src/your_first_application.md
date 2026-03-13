@@ -1,4 +1,4 @@
-# Chapter 1
+# QML Basics
 
 Some code:
 ```cpp
