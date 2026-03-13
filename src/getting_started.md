@@ -149,7 +149,7 @@ The original target will contain all the source code and the plugin target will 
 
 ## Link to app
 
-If you only want to use the code, you have to link the original library (ex: `myApp`). But if you also want to use the qml, you will have to also link the plugin library (ex: `myAppplugin`).
+If you only want to use the code, you have to link the original library (ex: `myLib`). But if you also want to use the qml, you will have to also link the plugin library (ex: `myLibplugin`).
 
 This can be a bit of a bother when you plan to always use them both.
 That why we can add the `NO_PLUGIN` parameters. This will merge both targets, allowing you to only link the original target.
