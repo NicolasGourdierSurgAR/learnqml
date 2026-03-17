@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MDBOOK_VERSION: 0.4.52
-      MDBOOK_ADMONISH_VERSION: 0.1.20
+      MDBOOK_ADMONISH_VERSION: 1.20.0
     steps:
       - uses: actions/checkout@v4
       - name: Install mdBook
