@@ -12,11 +12,9 @@ The first and easiest way to create a qlm component is to just write it where yo
 - The code have to be copied if you want to use it elsewhere
 - If the widget is large it may make the code difficult to read
 
-```admonish example "Example"
+````admonish example "Example"
 
 Here we will create a rectangle that certain fixed properties
-
-```
 
 ```qml
 
@@ -42,6 +40,8 @@ ApplicationWindow {
 
 ```
 
+````
+
 ## Components
 
 The first possible solution to factorize qml code is to use components.
@@ -58,9 +58,8 @@ A component is a qml widget that works as a template. You define ir in some plac
 - If the widget is large it may make the code difficult to read
 
 
-```admonish example "Example"
+````admonish example "Example"
 Here we will create a component named `MyWidget` that can be used multiple times
-```
 
 ```qml
 
@@ -94,11 +93,10 @@ ApplicationWindow {
 
 ```
 
-```admonish warning "Warning"
+**Warning**: Here the id `myWidget` is only accessible inside the component
 
-Here the id `myWidget` is only accessible inside the component
+````
 
-```
 
 ## Multiple files
 
@@ -114,9 +112,8 @@ The name of the file will be the name of the widget
 **Cons**:
 - Code might be difficult to update (since you'll have to update multiple files)
 
-```admonish example "Example"
+````admonish example "Example"
 Here we will create a component names `MyWidget` in a file.
-```
 
 In `MyWidget.qml`:
 
@@ -156,9 +153,9 @@ ApplicationWindow {
 }
 ```
 
-```admonish note "Note"
-The `import myLib` is only needed if `MyWidget` is inside the library `myLib` (see [getting started chapter](./getting_started.md))
-```
+**Note**: The `import myLib` is only needed if `MyWidget` is inside the library `myLib` (see [getting started chapter](./getting_started/3-use_library.md.md))
+
+````
 
 ```admonish error "Pitfalls"
 
@@ -170,7 +167,6 @@ But when use in a completely different file, the widget will be broken.
 
 So when creating a widget in a separated file, make sure that all the properties/ids used inside are available in the widget
 ```
-
 
 ## C++ widgets
 
@@ -184,12 +180,10 @@ To make it available into the qml you have to:
 - Import it into the qml file
 
 
-```admonish example "Example"
+````admonish example "Example"
 Here we will create a component named `ImageDisplay` in c++.
 
 Let's take the following widget
-```
-
 
 
 ```cpp
@@ -244,3 +238,5 @@ ApplicationWindow {
     }
 }
 ```
+
+````
