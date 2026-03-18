@@ -20,8 +20,7 @@ Thanks to this function, we no longer need to set `CMAKE_AUTOMOC` or `CMAKE_AUTO
 This function will also include `GNUInstallDirs`
 ```
 
-```admonish example "Example"
-
+````admonish example "Example"
 The minimal cmake required to build a qml app is the following:
 
 ```cmake
@@ -38,5 +37,4 @@ if(Qt6_FOUND)
     qt_standard_project_setup(REQUIRES 6.8)
 endif()
 ```
-
-```
+````

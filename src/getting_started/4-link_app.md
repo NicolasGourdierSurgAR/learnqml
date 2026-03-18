@@ -5,7 +5,7 @@ If you only want to use the code, you have to link the original library (ex: `my
 This can be a bit of a bother when you plan to always use them both.
 That why we can add the `NO_PLUGIN` parameters. This will merge both targets, allowing you to only link the original target.
 
-```admonish example "Example"
+````admonish example "Example"
 
 ```cmake
 set(_libName uiLib)
@@ -34,4 +34,4 @@ qt_add_qml_module(${_libName}
 target_link_libraries(${_libName} PUBLIC ${_publicLinks})
 ```
 
-```
+````

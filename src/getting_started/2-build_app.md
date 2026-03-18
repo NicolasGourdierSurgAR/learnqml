@@ -40,7 +40,7 @@ qt_add_qml_module(${_exeName}
 - **QML_FILES** is a list of qml files
 - **RESOURCES** is a list of resources like icons for examples. These will be accessible via the qt resource manager (qrc:/qt/.../myIcon.svg)
 
-```admonish example "Example"
+````admonish example "Example"
 
 ```cmake
 set(_exeName "qmlApp")
@@ -62,4 +62,4 @@ qt_add_qml_module(${_exeName}
 )
 ```
 
-```
+````
