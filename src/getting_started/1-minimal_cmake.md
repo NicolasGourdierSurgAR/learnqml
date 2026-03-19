@@ -2,13 +2,28 @@
 
 The version 6 of Qt requires at least c++17, in the following example we will ask for c++20 because why not.
 
+## Requirements
+
+You will need:
+- A cmake installation ([supported versions](https://doc.qt.io/qt-6/cmake-supported-cmake-versions.html))
+- An install of Qt 6 (you can find the installer on the [qt website](https://doc.qt.io/qt-6/qt-online-installation.html))
+- A compiler ([supported versions](https://doc.qt.io/qt-6/supported-platforms.html))
+
 ## Find Qt
 
 As any other third parties, we will need to first find it using a `find_package`.
 
-If Qt is not found, you will have to set the `Qt6_DIR` manually. usually the path is `/path/to/qt/dir/{qt_version}/{compiler}/lib/cmake/Qt6`.
+If Qt is not found, you will have to set the `Qt6_DIR` manually.
+
+```admonish note "How to set the Qt6_DIR"
+Usually the path is `/path/to/qt/dir/{qt_version}/{compiler}/lib/cmake/Qt6`.
 
 With `qt_version` the full version (ex: 6.8.6) and `compiler` the name of the compiler used (ex: gcc_64)
+
+To set it  in the cmake build, you can either:
+- Use **cmake-gui** or **ccmake**
+- Add the option in the cmake command: `cmake . -DQt6_DIR=...`
+```
 
 ## Setup project
 

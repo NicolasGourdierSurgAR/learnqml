@@ -1,14 +1,28 @@
 # Use a library
 
-If you want to be able to reuse qml widgets between multiple apps, ou will have to use a library.
+```admonish info "Info"
+This chapter is not needed to continue the course. So feel free to ignore this part.
+```
+
+If you want to go further into the creation of the project, we can also create a QML library.
+
+Libraries can be used to shared QML widgets between multiple apps. We will see how later in the course.
+
+```admonish info "Template"
+The template with the library can be found [here](https://github.com/BastienHerrerosSurgAR/qml-template/tree/advanced/with_library)
+```
 
 ## Create target
 
-Here, we won't need any c++ files (unless you want to create qml widgets in c++ of course, but we will see that later)
+When you build a QML library in cmake, you have to use `qt_add_library` instead of `add_library`.
 
+This cmake function takes the same parameters as the original function.
+
+```admonish info "More details"
 For `qt_add_library`, the function will:
 - Create the lib target
 - Finalize the target ([doc](https://doc.qt.io/qt-6.8/qt-finalize-target.html))
+```
 
 ## Add qml
 
@@ -29,7 +43,7 @@ qt_add_qml_module(${_libName}
 - **The first parameter** is the name of the target
 - **URI** is the name that will be used to import the widgets into the qml
 - **QML_FILES** is a list of qml files
-- **RESOURCES** is a list of resources like icons for examples. These will be accessible via the qt resource manager (qrc:/qt/.../myIcon.svg)
+- **RESOURCES** is a list of resources like icons for examples. These will be accessible via the qt resource manager ( (more on that on a later chapter))
 
 By default, for a library, the `qt_add_qml_module` will create another target named `myLibplugin` (if the original lib is names `myLib`) (see [doc](https://doc.qt.io/qt-6.8/qt-add-qml-module.html#targets-and-plugin-targets))
 
@@ -83,9 +97,8 @@ ApplicationWindow {
 
     ...
 
-    Hello.qml {}
+    Hello {}
 }
 ```
-
 
 ````
