@@ -15,7 +15,10 @@ Qt offers two ways of creating user interface: **Qt Widgets** and **Qt Quick**. 
 - TODO: Add a section explaining what this course will focus and what it will not.
 
 ## Prerequisites
-As we will explore how to create applications with QML and how to integrate it with C++, it is necessary to have a decent knowledge of this programming language. A beginner level will be enough for a good portion of this course, but more advance chapter like [TODO]() will require more of an intermediate level in C++
+### C++
+As we will explore how to create applications with QML and how to integrate it with C++, it is necessary to have a decent knowledge of this programming language. A beginner level will be enough for a good portion of this course, but more advance chapter like [TODO]() will require more of an intermediate level in C++.
+### CMake
+The build system we used for this course is **CMake**. A minimum compression of how it works can be beneficial to better understand the setting up of a project and how to customize it. That being said, as the build system is not the focus of this course, we will provide complete CMake snippet that should work at out of the box.
 
 ## Structure
 - TODO: Add a section to detail how the course is structured, how the pieces of codes are organized, how to run them, where to find the sample projects, etc... 
