@@ -1,4 +1,4 @@
-# Chapter 1
+# QML Basics
 
 Some code:
 ```cpp
@@ -16,4 +16,12 @@ Item {
     }
     visible: true
 }
+```
+
+```admonish info "An info"
+An informative message
+```
+
+```admonish
+List of [directives](https://tommilligan.github.io/mdbook-admonish/reference.html#directives)
 ```
