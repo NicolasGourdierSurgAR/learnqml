@@ -68,11 +68,6 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    QApplication::setApplicationName("Simple QML app");
-    QApplication::setApplicationVersion("1.0.0");
-    QApplication::setOrganizationName("SURGAR");
-    QApplication::setOrganizationDomain("surgar-surgery.com");
-
     // Init the qml engine
     QQmlApplicationEngine engine;
 
@@ -83,14 +78,12 @@ int main(int argc, char* argv[])
 
     return errorCode;
 }
-
 ```
 
 - A main QML file containing the content of the first window:
 
 ```qml
 import QtQuick
-import QtQuick.Window
 import QtQuick.Controls
 
 ApplicationWindow {
@@ -100,6 +93,7 @@ ApplicationWindow {
     visible: true
     width: 1280
     height: 720
+    color: "grey"
 }
 
 ```

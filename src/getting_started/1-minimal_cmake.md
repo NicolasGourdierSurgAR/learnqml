@@ -15,7 +15,7 @@ The version 6 of Qt requires at least c++17, in the following example we will as
 
 ## Minimal cmake project
 
-First wer will need to initialize the cmake project.
+First we will need to initialize the cmake project.
 
 ````admonish info "Folder structure"
 
