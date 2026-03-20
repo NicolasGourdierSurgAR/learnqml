@@ -26,7 +26,7 @@ ApplicationWindow {
     }
 }
 ```
-
+#### The imports
 As in many programming language each QML file start by the imports. Qt provide several modules that can be imported to use different items in a QML file. Of course, you can create your own module, but this will be the subject of a later chapter.
 
 The main qml modules to know are:
@@ -36,13 +36,52 @@ The main qml modules to know are:
 
 In our exemple, we imported **QtQuick** to use **Text** and **QtQuick.Controls** to use **ApplicationWindow**.
 
+#### The root object
 Next, we've got an object at the root, here it is **ApplicationWindow**. Each QML file must have one single object at its root.
 
 ```admonish info "Item vs Object"
 Note that an **Item** and an **Object** in QML are two different things. An **Object** (the actual type being **QtObject**) is the base type for everything. An **Item** (that inherit from QtObject) is the base type for every **visual** objects, it contains all of the common attributes such as x, y, width, height, etc.
 ```
 
--- the properties
+#### The properties
+Every object has a set of attributes, some exist by default and can be customized (like the property "text" for a button), but one can add as many attribute as it want to any QML object.
+
+There is different types of attribute, we will not dig too deep in all of them for this chapter, nevertheless here is the available list:
+- the **id** attribute
+- **property**
+- **signal**
+- **signal handler**
+- **functions**
+- **attached properties** and **attached signal handler**
+- **enumeration**
+- **child object**
+- **inline component**
+
+````admonish tip "Organizing your files"
+We highly recommand that you organize the content of your files tightly from the start, to make things easier to find and modify. This will prove usefull especially when files become larger. Everyone has its own way of organizing a file, most of them are probably valid; what we propose is:
+```qml
+RootItem {
+    id: root // always name the root item "root"
+
+    // The signals
+    signal mySignal()
+
+    // The enums
+    enum MyEnum { First = 0, Second = 1}
+
+    // The properties relative to size or positioning
+    x: 5
+    width: 200
+
+    // The other properties
+    color: "red"
+
+    // The signal handlers
+    onWidthChanged: console.log("width");
+
+}
+```
+````
 
 ```admonish warning "The visible property"
 Do not forget to set the `visible` property to true. For some reason its default is `false`, hence by default the window will not be visible.
