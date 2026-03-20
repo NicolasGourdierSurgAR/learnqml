@@ -1,8 +1,8 @@
-# Your first application
+## Your first application
 
 If the previous chapter went well, you should already have a working QML application. Let's start here by dissecting the two main files.
 
-## Main.qml
+### Main.qml
 
 Here is an exemple of a an "Hello world" in QML (it might differ a bit from the exemple you got in the last chapter):
 ```qml
