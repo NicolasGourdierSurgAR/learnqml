@@ -7,7 +7,7 @@ In order to build a minimal app, you will need 3 files:
 - main.cpp
 - Main.qml
 
-We will not go into the details of the `Main.qml` and `main.cpp` files for now. You can find examples in the first chapter and in the [template](https://github.com/BastienHerrerosSurgAR/qml-template/).
+We will not go into the details of the `Main.qml` and `main.cpp` files for now. You can find examples in the following chapters and in the [template](https://github.com/BastienHerrerosSurgAR/qml-template/).
 
 On the cmake side, Qt gives access to new functions used to create executables or libraries.
 
@@ -25,11 +25,34 @@ For `qt_add_executable`, the function will:
 - Finalize the project ([doc](https://doc.qt.io/qt-6.8/qt-finalize-project.html))
 ```
 
-You will then need to link Qt to this target. The minimal targets you need are:
+You will then need to link Qt to this target using `target_add_library`. The minimal targets you need are:
 - Qt::Core
 - Qt::Qml
 - Qt::Quick
 - Qt::Widgets
+
+````admonish example "Example"
+
+This gives us the following code in the app CMakeLists:
+
+```cmake
+set(_exeName "qmlApp")
+
+set(_cppSources
+    main.cpp)
+
+set(_links
+    Qt::Core
+    Qt::Qml
+    Qt::Quick
+    Qt::Widgets)
+
+qt_add_executable(${_exeName} ${_cppSources})
+
+target_link_libraries(${_exeName} PRIVATE ${_links})
+```
+
+````
 
 ## Add qml
 
@@ -50,9 +73,11 @@ qt_add_qml_module(${_exeName}
 - **The first parameter** is the name of the target
 - **URI** is the name that will be used to import the widgets into the qml
 - **QML_FILES** is a list of qml files
-- **RESOURCES** is a list of resources like icons for examples. These will be accessible via the qt resource manager (qrc:/qt/.../myIcon.svg)
+- **RESOURCES** is a list of resources like icons for examples. These will be accessible via the qt resource manager (more on that on a later chapter)
 
 ````admonish example "Example"
+
+This gives us the following code in the app CMakeLists:
 
 ```cmake
 set(_exeName "qmlApp")
@@ -94,9 +119,11 @@ The `Main.qml` file is the first page that will be open by the app.
 
 ```admonish note "Note"
 The main QML file can be named however you want, the only requirement is that the file start with an upper case letter.
+
+In this course, it will be named `Main.qml` and stored in `src/qmlApp/app`
 ```
 
-In this file, we will define the main parameter of the window define it's content.
+In this file, we will define the main parameter of the window define its content.
 
 For now, we will no go further into details about these parameters.
 
@@ -104,7 +131,6 @@ For now, we will no go further into details about these parameters.
 
 ```qml
 import QtQuick
-import QtQuick.Window
 import QtQuick.Controls
 
 ApplicationWindow {
@@ -114,6 +140,7 @@ ApplicationWindow {
     visible: true
     width: 1280
     height: 720
+    color: "grey"
 }
 
 ```
@@ -145,11 +172,6 @@ It take two arguments:
 int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
-
-    QApplication::setApplicationName("Simple QML app");
-    QApplication::setApplicationVersion("1.0.0");
-    QApplication::setOrganizationName("SURGAR");
-    QApplication::setOrganizationDomain("surgar-surgery.com");
 
     // Init the qml engine
     QQmlApplicationEngine engine;
