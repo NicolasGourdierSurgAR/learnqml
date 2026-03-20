@@ -24,14 +24,14 @@ But for this project, we propose the following structure:
 
 ```
 qml-template
-    |- CMakeLists.txt #will be called the `root CMakeLists`
-    |- src
-        |- CMakeLists.txt
-        |- qmlApp
-            |- app
-            |- assets
-            |- widgets
-            |- CMakeLists.txt #will be called the `app CMakeLists`
+    ├─ CMakeLists.txt #will be called the `root CMakeLists`
+    └─ src
+        ├─ CMakeLists.txt
+        └─ qmlApp
+            ├─ app
+            ├─ assets
+            ├─ widgets
+            └─ CMakeLists.txt #will be called the `app CMakeLists`
 
 ```
 
