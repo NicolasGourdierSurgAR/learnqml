@@ -1,6 +1,6 @@
 ## Your first application
 
-If the previous chapter went well, you should already have a working QML application. Let's start here by dissecting the two main files.
+If the previous chapter went well, you should already have a working QML application. Let's start here by dissecting the main QML file.
 
 ### Main.qml
 
@@ -79,9 +79,37 @@ RootItem {
     // The signal handlers
     onWidthChanged: console.log("width");
 
+    // The child objects
+    Rectangle {
+
+    }
+
+    // The functions
+    function myFunction() {
+
+    }
+
+    // The inline components
+    component MyLocalLabel : Label {
+        color: "chartreuse"
+    }
 }
 ```
 ````
+So here, we set a couple of properties for the root item:
+- title: the title of the window
+- visible: whether it should be displayed
+- width: it's width
+- height: you guess it, it's height
+- color: the background color
+
+Then we added an item (specifically a **Text**) as a child of the root object; and we set some properties for this text (namely x, y, text and color).
+
+Note that the property **id** is not mandatory (we set it for the ApplicationWindow but not for the Text).
+
+If all went well, you should obtain the following window:
+![image](./images/HelloWorld.png)
+
 
 ```admonish warning "The visible property"
 Do not forget to set the `visible` property to true. For some reason its default is `false`, hence by default the window will not be visible.
