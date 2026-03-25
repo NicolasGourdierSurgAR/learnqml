@@ -1,7 +1,7 @@
 # Use a library
 
 ```admonish info "Info"
-This chapter is not needed to continue the course. So feel free to ignore this part.
+This chapter is not needed to continue the course. So feel free to ignore this part or come back later when your sandbox project start growing.
 ```
 
 If you want to go further into the creation of the project, we can also create a QML library.
@@ -51,10 +51,10 @@ The original target will contain all the source code and the plugin target will 
 
 ## Link to app
 
-If you only want to use the code, you have to link the original library (ex: `myLib`). But if you also want to use the qml, you will have to also link the plugin library (ex: `myLibplugin`).
+If you only want to use the cpp files, you have to link the original library (ex: `myLib`). But if you also want to use the qml, you will have to also link the plugin library (ex: `myLibplugin`).
 
 This can be a bit of a bother when you plan to always use them both.
-That why we can add the `NO_PLUGIN` parameters. This will merge both targets, allowing you to only link the original target.
+That is why we can add the `NO_PLUGIN` parameters. This will merge both targets, allowing you to only link the original target.
 
 And finally, you can import the library into the qml using `import myLib`
 

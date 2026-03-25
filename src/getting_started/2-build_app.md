@@ -109,8 +109,6 @@ target_link_libraries(${_exeName} PRIVATE ${_links})
 
 ````
 
-## Main code file
-
 Now that we have the cmake setup, we can finally have a look at the c++ and QML files.
 
 ## Main QML file
