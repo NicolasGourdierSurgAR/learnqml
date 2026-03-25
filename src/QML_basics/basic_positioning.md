@@ -37,7 +37,7 @@ This produce the following window:
 ![image](./images/NestedRectangle.png)
 
 ```admonish note "The color property"
-Note that we used the *color* property two different ways here. The first one was by giving an hexadecimal value (`"#202020"`), the second one was by giving a svg color name (`"red"`). You can find the full documentation for color [here](https://doc.qt.io/qt-6/qml-color.html).
+Note that we used the *color* property two different ways here. The first one was by giving an hexadecimal value (`"#202020"`), the second and third ones were by giving a svg color name (`"red"`). You can find the full documentation for color [here](https://doc.qt.io/qt-6/qml-color.html).
 ```
 
 ### Exercice 1
