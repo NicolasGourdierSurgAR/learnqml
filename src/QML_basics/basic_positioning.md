@@ -78,5 +78,15 @@ ApplicationWindow {
 ```
 ````
 
+
 ## Anchors
-You probably already though that is a quite poor way to set the position and size of item. Indeed, this is clearly not *responsive*. 
+You probably already though that is a quite poor way to set the position and size of item, and that will not suffice for the majority of the use cases. Indeed, this is clearly not *responsive*. The first alternative is the **anchors**. The **anchors** allow you to bind an anchor line of an item to an anchors line of an other item (parent of sibling).
+```admonish example
+```
+Here ...
+
+There are 7 anchors lines: left, horizontalCenter, right, top, verticalCenter, bottom and baseline. Baseline is rarely used so we will not detail it here. You can see the location of the 6 first anchor lines in the following picture (taken from the [QT website](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html)).
+
+```admonish warning "The effect of the anchors"
+Using the anchors will affect the x,y, with and height properties depending on the anchors used. It means that setting an anchors to the
+```
