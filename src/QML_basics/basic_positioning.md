@@ -41,11 +41,12 @@ Note that we used the *color* property two different ways here. The first one wa
 ```
 
 ### Exercice 1
-This is a good time to start practicing. The proposal here, is to reproduce the following window in QML.  An exemple of how to achieve it will be given right afterward. Feel free to experiment and to try own ideas.
+Even though it does not seem much, this is a good time to start practicing simple exercices. The proposal here, is to reproduce the following window in QML.  An exemple of how to achieve it will be given right afterward. Feel free to experiment and to try own ideas.
 Window to reproduce:
+
 ![image](./images/Exercice1.png)
 
-````admonish abstract "Exercice correction"
+````admonish abstract "Exercice solution"
 ```qml
 import QtQuick
 import QtQuick.Controls
