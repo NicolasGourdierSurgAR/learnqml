@@ -41,9 +41,41 @@ Note that we used the *color* property two different ways here. The first one wa
 ```
 
 ### Exercice 1
-This is a good time to start practicing. The proposal here, is to reproduce the following window in QML, an exemple of how to achieve it will be given at the end of chapter. Feel free to experiment and to try own ideas.
+This is a good time to start practicing. The proposal here, is to reproduce the following window in QML.  An exemple of how to achieve it will be given right afterward. Feel free to experiment and to try own ideas.
 Window to reproduce:
 ![image](./images/Exercice1.png)
+
+````admonish abstract "Exercice correction"
+```qml
+import QtQuick
+import QtQuick.Controls
+
+ApplicationWindow {
+    id: root
+
+    title: "Hello World"
+    visible: true
+    width: 400
+    height: 400
+    color: "#202020"
+
+    Rectangle {
+        x: 0
+        y: 0
+        height: 400
+        width: 200
+        color: "red"
+    }
+    Rectangle {
+        x: 200
+        y: 0
+        height: 400
+        width: 200
+        color: "green"
+    }
+}
+```
+````
 
 ## Anchors
 You probably already though that is a quite poor way to set the position and size of item. Indeed, this is clearly not *responsive*. 
