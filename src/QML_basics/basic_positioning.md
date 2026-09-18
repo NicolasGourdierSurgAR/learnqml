@@ -1,6 +1,6 @@
 ## Basic positioning
 
-There is different way to define the position and the size of items in QML, some are simpler than others, some are more automatic than others. Let's start  with the basics.
+There is different ways to define the position and the size of items in QML, some are simpler than others, some are more automatic than others, each one has its own use cases. Let's start  with the basics.
 
 ### x, y, width, height
 
@@ -9,10 +9,11 @@ In the previous exemple you noticed we used *x*, *y*, *width* and *height*. Thes
 ApplicationWindow {
     id: root
 
-    title: "Hello World"
-    visible: true
     width: 400
     height: 400
+
+    title: "Hello World"
+    visible: true
     color: "#202020"
 
     Rectangle {
@@ -20,6 +21,7 @@ ApplicationWindow {
         y: 20
         height: 100
         width: 100
+
         color: "blue"
 
         Rectangle {
@@ -27,6 +29,7 @@ ApplicationWindow {
             y: 25
             height: 50
             width: 50
+
             color: "red"
         }
     }
@@ -54,10 +57,11 @@ import QtQuick.Controls
 ApplicationWindow {
     id: root
 
-    title: "Hello World"
-    visible: true
     width: 400
     height: 400
+
+    title: "Hello World"
+    visible: true
     color: "#202020"
 
     Rectangle {
@@ -65,6 +69,7 @@ ApplicationWindow {
         y: 0
         height: 400
         width: 200
+
         color: "red"
     }
     Rectangle {
@@ -72,6 +77,7 @@ ApplicationWindow {
         y: 0
         height: 400
         width: 200
+
         color: "green"
     }
 }
@@ -80,12 +86,52 @@ ApplicationWindow {
 
 
 ## Anchors
-You probably already though that is a quite poor way to set the position and size of item, and that will not suffice for the majority of the use cases. Indeed, this is clearly not *responsive*. The first alternative is the **anchors**. The **anchors** allow you to bind an anchor line of an item to an anchors line of an other item (parent of sibling).
-```admonish example
-```
-Here ...
+You probably already though that is a quite poor way to set the position and size of item, and that will not suffice for the majority of the use cases. Indeed, this is clearly not *responsive*. The first alternative is the **anchors**.
+
+Basicaly **anchors** are way to say "The left of this item will be glued to the right of that item",  "This item will fill its parent" or "This item will be centered in its parent".
+
+
+The **anchors** allow you to bind an anchor line of an item to an anchors line of an other item (parent of sibling).
 
 There are 7 anchors lines: left, horizontalCenter, right, top, verticalCenter, bottom and baseline. Baseline is rarely used so we will not detail it here. You can see the location of the 6 first anchor lines in the following picture (taken from the [QT website](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html)).
+
+![image](./images/AnchorsLines.png)
+
+With this new concept, we can improve our last exercice and make it responsive. 
+```qml
+import QtQuick
+import QtQuick.Controls
+
+ApplicationWindow {
+    id: root
+
+    width: 400
+    height: 400
+
+    title: "Hello World"
+    visible: true
+    color: "#202020"
+
+    Rectangle {
+        id: rectangleLeft
+
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        width: 200
+
+        color: "red"
+    }
+    Rectangle {
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: rectangleLeft.right
+        anchors.right: parent.right
+
+        color: "green"
+    }
+}
+```
 
 ```admonish warning "The effect of the anchors"
 Using the anchors will affect the x,y, with and height properties depending on the anchors used. It means that setting an anchors to the
