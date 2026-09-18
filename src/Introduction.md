@@ -11,6 +11,8 @@ Qt offers two ways of creating user interface: **Qt Widgets** and **Qt Quick**. 
 ### Qt Quick
 **QML** is a *user interface markup language* developped by Qt. It is made to develop user interface very quickly, it is highly customizable and can run virtualy anywhere, from desktop, to mobile and embeded. It it also very fast, but as it is a new language, it is sometimes quite hard to grasp and can be unpredictable. **Qt Quick** is the framework and the library build around the creation of application with QML.
 
+- TODO: Add a few rapid example of what QML can achieve ? (with screeshots)
+
 ## What this course cover
 - TODO: Add a section explaining what this course will focus and what it will not.
 
