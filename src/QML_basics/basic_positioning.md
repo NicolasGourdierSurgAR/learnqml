@@ -135,7 +135,7 @@ ApplicationWindow {
 ```
 This produces the following window:
 
-![image](./images/AnchorsMargins.png)
+![image](./images/BasicAnchors.png)
 
 ### Anchoring shortcuts
 Two combinations of anchors are so common that QML provides a shortcut for them:
@@ -265,6 +265,10 @@ ApplicationWindow {
     }
 }
 ```
+
+This produces the following window:
+
+![image](./images/BasicColumn.png)
 
 ```admonish note "Column/Row vs Layouts"
 Do not confuse **Column**/**Row** with **ColumnLayout**/**RowLayout** from **QtQuick.Layouts**. The positioners seen here only place their children one after the other, at the size the children already have. **Layouts**, covered in a later chapter, can additionally resize their children to make the best use of the available space. Prefer **Column**/**Row** for a simple, static list of items, and **Layouts** when items need to grow or shrink with their container.
