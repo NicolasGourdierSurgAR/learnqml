@@ -1,11 +1,14 @@
-## Basic positioning
+# Basic positioning
 
 There are different ways to define the position and the size of items in QML, some are simpler than others, some are more automatic than others, each one has its own use cases. Let's start with the basics.
 
-### x, y, width, height
+## x, y, width, height
 
-In the previous exemple you noticed we used *x*, *y*, *width* and *height*. These are pretty straight forward, they define the position of an Item **relative to its parent**. The (0,0) point is in the top left corner. The following qml exemple should speak for itself.
+In the previous example you noticed we used *x*, *y*, *width* and *height*. These are pretty straight forward: *x* and *y* define the position of an Item **relative to its parent**, while *width* and *height* define its size. The (0,0) point is in the top left corner. The following qml example should speak for itself.
 ```qml
+import QtQuick
+import QtQuick.Controls
+
 ApplicationWindow {
     id: root
 
@@ -40,16 +43,16 @@ This produces the following window:
 ![image](./images/NestedRectangle.png)
 
 ```admonish note "The color property"
-Note that we used the *color* property two different ways here. The first one was by giving an hexadecimal value (`"#202020"`), the second and third ones were by giving a svg color name (`"red"`). You can find the full documentation for color [here](https://doc.qt.io/qt-6/qml-color.html).
+Note that we used the *color* property two different ways here. The first one was by giving a hexadecimal value (`"#202020"`), the second and third ones were by giving an SVG color name (`"red"`). You can find the full documentation for color [here](https://doc.qt.io/qt-6/qml-color.html).
 ```
 
-### Exercice 1
-Even though it does not seem much, this is a good time to start practicing simple exercices. The proposal here, is to reproduce the following window in QML.  An exemple of how to achieve it will be given right afterward. Feel free to experiment and to try own ideas.
-Window to reproduce:
+Here is a second window, built with nothing more than the four properties we just saw:
 
-![image](./images/Exercice1.png)
+![image](./images/TwoRectangles.png)
 
-````admonish abstract "Exercice solution"
+The code is given below, but it is folded away on purpose: you now know everything needed to write it yourself, so have a go at it first if you feel like it.
+
+````admonish abstract "Show the code"
 ```qml
 import QtQuick
 import QtQuick.Controls
@@ -93,11 +96,21 @@ Basically, **anchors** are a way to say "The left of this item will be glued to 
 
 The **anchors** allow you to bind an anchor line of an item to an anchor line of another item (its parent or a sibling).
 
-There are 7 anchor lines: left, horizontalCenter, right, top, verticalCenter, bottom and baseline. Baseline is rarely used so we will not detail it here. You can see the location of the 6 first anchor lines in the following picture (taken from the [QT website](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html)).
+There are 7 anchor lines: left, horizontalCenter, right, top, verticalCenter, bottom and baseline. Baseline is rarely used so we will not detail it here. You can see the location of the 6 first anchor lines in the following picture (taken from the [Qt website](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html)).
 
 ![image](./images/AnchorsLines.png)
 
+```admonish warning "You can only anchor to a parent or a sibling"
+For performance reasons, an item can only be anchored to its **direct parent** or to one of its **siblings**. Anchoring to a grandparent, to a cousin, or to any other item of the file is invalid: the anchor is ignored and Qt prints the runtime warning `Cannot anchor to an item that isn't a parent or sibling`.
+
+This is by far the most common mistake made with anchors. When you hit it, the fix is usually to anchor in two steps through the common ancestor, or to restructure your items a little.
+```
+
 When two edges are anchored together, they touch by default. If you want to keep some space between them, use the `margins` group property: `anchors.margins` sets the same margin on every anchored edge at once, while `anchors.leftMargin`, `anchors.topMargin`, `anchors.rightMargin` and `anchors.bottomMargin` let you control each side individually.
+
+```admonish note "Margins only apply to anchored edges"
+A margin only has an effect on an edge that is actually anchored. As the Qt documentation puts it, *"anchor margins only apply to anchors; they are not a generic means of applying margins to an Item"*. Setting `anchors.margins` on an item positioned with `x` and `y` does strictly nothing.
+```
 
 ```qml
 import QtQuick
@@ -143,24 +156,38 @@ Two combinations of anchors are so common that QML provides a shortcut for them:
 - `anchors.centerIn` anchors both the horizontal and vertical centers at once, centering the item on its target.
 
 ```qml
-Rectangle {
-    // Same as anchoring top, bottom, left and right to parent
-    anchors.fill: parent
+import QtQuick
+import QtQuick.Controls
 
-    color: "blue"
-}
+ApplicationWindow {
+    id: root
 
-Rectangle {
-    // Same as anchoring horizontalCenter and verticalCenter to parent
-    anchors.centerIn: parent
-    width: 50
-    height: 50
+    width: 400
+    height: 400
 
-    color: "red"
+    title: "Hello World"
+    visible: true
+    color: "#202020"
+
+    Rectangle {
+        // Same as anchoring top, bottom, left and right to parent
+        anchors.fill: parent
+
+        color: "blue"
+
+        Rectangle {
+            // Same as anchoring horizontalCenter and verticalCenter to parent
+            anchors.centerIn: parent
+            width: 50
+            height: 50
+
+            color: "red"
+        }
+    }
 }
 ```
 
-With this new concept, we can improve our last exercice and make it responsive. 
+With this new concept, we can go back to our two rectangles and make them responsive.
 ```qml
 import QtQuick
 import QtQuick.Controls
@@ -185,7 +212,7 @@ ApplicationWindow {
 
         color: "red"
     }
-    
+
     Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -196,6 +223,7 @@ ApplicationWindow {
     }
 }
 ```
+This gives the same window as before, with one big difference: try resizing it. The green rectangle now follows the right edge of the window, whereas the previous version kept two fixed 200 pixel wide rectangles whatever the size of the window.
 
 ````admonish tip "Grouping properties"
 When several properties belong to the same group, like the anchors we just saw, QML lets you set them either one by one with dots, or all together using braces. The following two snippets are strictly equivalent:
@@ -218,10 +246,12 @@ Rectangle {
 The braces syntax is often preferred when you set several properties of the same group, as it avoids repeating the group name and keeps things visually together. This is not specific to **anchors**: other group properties such as **font** or **border** can be used the same way.
 ````
 
-```admonish warning "The effect of the anchors"
+```admonish warning "Never mix anchors and explicit positioning"
 Using anchors affects the x, y, width and height properties of an item, depending on which anchor lines are used. For example, anchoring both `left` and `right` will drive both `x` and `width`, while anchoring only `top` will drive `y`.
 
-If you set both an anchor and an explicit `x`, `y`, `width` or `height` for the same dimension on the same item, **the anchor takes precedence**: the explicit value will be overridden. Avoid mixing the two for the same dimension, it will only make the item's behavior harder to predict.
+Because of this, anchors and absolute positioning **cannot be mixed for the same dimension**. If an item sets `x` and also sets `anchors.left`, or anchors its `left` and `right` edges but additionally sets a `width`, the result is *undefined*. There is no rule saying which of the two wins, so whatever you observe on your machine is not something you can rely on. The same goes for `y` and `height` together with `anchors.top`/`anchors.bottom`, or for `anchors.fill` together with `width` or `height`.
+
+Pick one of the two approaches for a given dimension, and stick to it.
 ```
 
 ## Column and Row
@@ -270,10 +300,20 @@ This produces the following window:
 
 ![image](./images/BasicColumn.png)
 
+**Column** and **Row** are the two simplest positioners of QtQuick, but they are not the only ones: **Grid** arranges its children in a two dimensional grid, and **Flow** places them one after the other, wrapping to a new line when it runs out of space. Everything said here applies to those two as well.
+
+```admonish warning "Do not anchor the children of a Column or a Row"
+A positioner takes care of placing its children itself, so a child must not fight it. Inside a **Column**, a child should not set its `y` position nor anchor itself vertically, which rules out `anchors.top`, `anchors.bottom`, `anchors.verticalCenter`, `anchors.fill` and `anchors.centerIn`. Inside a **Row**, the same holds for `x` and for the horizontal anchors.
+
+Anchoring the positioner **itself** is perfectly fine, as we did above with `anchors.fill: parent`. It is only its direct children that are constrained. And a child may still anchor in the *other* direction: inside a **Column**, setting `anchors.horizontalCenter` on a child is allowed and quite common.
+```
+
 ```admonish note "Column/Row vs Layouts"
 Do not confuse **Column**/**Row** with **ColumnLayout**/**RowLayout** from **QtQuick.Layouts**. The positioners seen here only place their children one after the other, at the size the children already have. **Layouts**, covered in a later chapter, can additionally resize their children to make the best use of the available space. Prefer **Column**/**Row** for a simple, static list of items, and **Layouts** when items need to grow or shrink with their container.
 ```
 
 ```admonish tip "Time to practice"
-This is a good time to pause and experiment on your own. Try, for instance, to reproduce Exercice 1 again, this time using **anchors** instead of fixed `x`/`width` values, or rebuild it using a **Row** with two Rectangles. You could also try mixing things up: a **Column** anchored to fill its parent, containing a couple of items that are themselves centered or filled with `anchors.centerIn`/`anchors.fill`. There is no single right answer here, the goal is simply to get comfortable switching between these different ways of positioning items.
+This is a good time to pause and experiment on your own. Take the two rectangles from the beginning of the chapter and rebuild them with a **Row** instead of `x` and `width`. Play with `spacing`, drop a **Text** inside a **Rectangle** and center it with `anchors.centerIn`, nest a **Column** inside one of the rectangles, resize the window and watch what follows and what does not.
+
+There is no single right answer here, and nothing to hand in. The goal is simply to get a feel for the three techniques and for when each of them is the comfortable one. A more complete exercise will come in a later chapter, once we have a few more tools at hand.
 ```
