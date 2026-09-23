@@ -39,13 +39,13 @@ This structure will be used all along this course, but feel free to use your own
 
 ````
 
-```admonish note "Additional cmake file"
+````admonish note "Additional cmake file"
 If you followed the proposed folder structure, you will need to add a CMakeLists in the `src` folder that contains the following line:
 
 ```cmake
 add_subdirectory(qmlApp)
 ```
-```
+````
 
 To do that, we need at least the following lines in the `root CMakeLists`:
 
