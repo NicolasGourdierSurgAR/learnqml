@@ -9,3 +9,5 @@
 - [QML Basics](./QML_basics/QML_basics.md)
     - [Your first application](./QML_basics/your_first_application.md)
     - [Basic positioning](./QML_basics/basic_positioning.md)
+- [The properties and property binding](./properties_and_property_binding/properties_and_property_binding.md)
+    - [Signals and signal handlers](./properties_and_property_binding/signals_and_signal_handlers.md)
