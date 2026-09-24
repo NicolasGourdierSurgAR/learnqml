@@ -2,7 +2,7 @@
 
 ## Default values
 
-Following the first examples, you might ask yourself what happen if you do not set any size to an Item. Let's take the following example (from now on, we will not always write the imports to gain in clarity):
+After the first examples, you might wonder what happens when you leave out some of these properties. Let's take the following example, where the **Rectangle** has a size but no position (from now on, we will not always write the imports, for the sake of brevity):
 
 ```qml
 ApplicationWindow {
@@ -27,9 +27,9 @@ Let's run it:
 
 ![image](./images/NoXAndYRect.png)
 
-You guessed it: all property have a default value. Here, x and y default to 0. For the a Rectangle, width and height also default to 0 but this is not the case for all widgets, you should understand why by the end of this chapter.
+You guessed it: every property has a default value. Here, x and y default to 0. For a **Rectangle**, width and height also default to 0, but this is not the case for every item. You will understand why by the end of this page.
 
-So, if we reproduce the last example, but we remove width and height, the red Rectangle should disapear (or rather it should have a width and height of 0):
+So, if we take the last example and remove the width and height, the red **Rectangle** should disappear (or rather, it should have a width and height of 0):
 ```qml
 ApplicationWindow {
     id: root
@@ -50,13 +50,13 @@ This produces the following output:
 
 ![image](./images/NoSizeRect.png)
 
-## Implicit Sizes
+## Implicit sizes
 
-In qml all widgets have an implicit size (implicitWidth and implicitHeight) and an actual size. The distinction is important to grasp, as this is a very usefull tool to let widget have an automatic sizing, but is also often a source of error when not fully understood.
+In QML, every item has an implicit size (`implicitWidth` and `implicitHeight`) and an actual size (`width` and `height`). This distinction is important to grasp: it is a very useful tool to let items size themselves automatically, but it is also a common source of errors when not fully understood.
 
-The implicitWidth of a widget is the **default** width of a widget, and the implicitHeight is of course the **default** height of a widget. Each specific widget should have an implicitWidth that make sense in its context. For example the **implicitWidth** (default width) of a ```Text``` is exactly how much width the text content needs to be fully displayed depending on its font size, boldness, spacing, etc. Similarly the **implicitWidth** of a ```Button``` is the implicit width of the text it contains + an eventual icon + a spacing between the icon and the text + some eventual margins around all that.
+The `implicitWidth` of an item is its **natural** width, the one it would like to have, and the `implicitHeight` is, of course, its natural height. Each type should define an implicit size that makes sense in its context. For example, the implicit width of a `Text` is exactly the width its content needs to be fully displayed, depending on its font size, boldness, letter spacing, etc. Similarly, the implicit width of a `Button` is roughly the width of its text, plus its icon if it has one, plus the spacing between the icon and the text, plus some padding around all that.
 
-We can actualy showcase that by logging the implicitWidth of a Text at its construction:
+We can actually show this by logging the `implicitWidth` of a `Text` once it is created:
 
 ```qml
 Text {
@@ -66,13 +66,13 @@ Text {
 }
 ```
 
-Gives the output:
+gives the output:
 
 ```text
 15.40625
 ```
 
-Whereas:
+whereas:
 
 ```qml
 Text {
@@ -82,16 +82,16 @@ Text {
 }
 ```
 
-Gives the output:
+gives the output:
 
 ```text
 53.921875
 ```
 
-Here we can see the implicitWidth of a ```Text``` does depends on its content.
+This shows that the implicit width of a `Text` depends on its content. (The exact values depend on the font used on your system, so do not worry if yours differ.)
 
-So, actually by default the **width** of a Rectangle is not really 0, it is rather equal to the implicitWidth which is itself, for a Rectangle 0.
+Here is the key point: as long as you do not set an item's `width` explicitly, its `width` follows its `implicitWidth` (and likewise for `height` and `implicitHeight`). So the default width of a **Rectangle** is not really "0": it is its implicit width, which happens to be 0 for a **Rectangle**. This is also why the **Text** of our very first "Hello world" example was displayed correctly even though we never gave it a size: it simply took its implicit size.
 
-The implicit sizes (implicitWidth and implicitHeight) should almost nether be modified when using a widget, they should only be defined once when designing the said widget, but then when you want to use it and modify its size, use the plain width and height.
+When you *use* an item, you should almost never modify its implicit size. The implicit size is meant to be defined once, when *designing* the item. When you want to change the size of an item you use, set its plain `width` and `height`.
 
-When you will design your own reusable widgets, choosing an appropriate implicit size, but also letting the widget react correctly to a smaller and a larger size will be crucial to make them really usable.
+When you design your own reusable items later in this course, choosing an appropriate implicit size, and making sure the item still behaves well when made smaller or larger than that, will be crucial to make them truly reusable.
