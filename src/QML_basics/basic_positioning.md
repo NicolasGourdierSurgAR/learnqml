@@ -1,10 +1,10 @@
 # Basic positioning
 
-There are different ways to define the position and the size of items in QML, some are simpler than others, some are more automatic than others, each one has its own use cases. Let's start with the basics.
+There are several ways to define the position and size of items in QML. Some are simpler than others, some are more automatic, and each has its own use cases. Let's start with the basics.
 
 ## x, y, width, height
 
-In the previous example you noticed we used *x*, *y*, *width* and *height*. These are pretty straight forward: *x* and *y* define the position of an Item **relative to its parent**, while *width* and *height* define its size. The (0,0) point is in the top left corner. The following qml example should speak for itself.
+You may have noticed that the previous example used *x*, *y*, *width* and *height*. These are pretty straightforward: *x* and *y* define the position of an item **relative to its parent**, while *width* and *height* define its size. The (0,0) point is the top-left corner of the parent. The following QML example should speak for itself.
 ```qml
 import QtQuick
 import QtQuick.Controls
@@ -43,7 +43,7 @@ This produces the following window:
 ![image](./images/NestedRectangle.png)
 
 ```admonish note "The color property"
-Note that we used the *color* property two different ways here. The first one was by giving a hexadecimal value (`"#202020"`), the second and third ones were by giving an SVG color name (`"red"`). You can find the full documentation for color [here](https://doc.qt.io/qt-6/qml-color.html).
+Note that we set the *color* property in two different ways here: the first time with a hexadecimal value (`"#202020"`), the other two with an SVG color name (`"blue"`, `"red"`). You can find the full documentation for color [here](https://doc.qt.io/qt-6/qml-color.html).
 ```
 
 Here is a second window, built with nothing more than the four properties we just saw:
@@ -89,14 +89,11 @@ ApplicationWindow {
 
 
 ## Anchors
-You probably already thought that this is a quite poor way to set the position and size of an item, and that it will not suffice for the majority of the use cases. Indeed, this is clearly not *responsive*. The first alternative is the **anchors**.
+You have probably already guessed that fixed coordinates are a rather poor way to position and size items, and that they will not be enough for most use cases. Indeed, they are clearly not *responsive*: nothing moves when the window is resized. The first alternative is **anchors**.
 
-Basically, **anchors** are a way to say "The left of this item will be glued to the right of that item", "This item will fill its parent" or "This item will be centered in its parent".
+Basically, **anchors** are a way to say "the left edge of this item is glued to the right edge of that item", "this item fills its parent" or "this item is centered in its parent". More precisely, they let you attach an anchor line of an item to an anchor line of another item (its parent or a sibling).
 
-
-The **anchors** allow you to bind an anchor line of an item to an anchor line of another item (its parent or a sibling).
-
-There are 7 anchor lines: left, horizontalCenter, right, top, verticalCenter, bottom and baseline. Baseline is rarely used so we will not detail it here. You can see the location of the 6 first anchor lines in the following picture (taken from the [Qt website](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html)).
+There are 7 anchor lines: left, horizontalCenter, right, top, verticalCenter, bottom and baseline. Baseline is rarely used, so we will not detail it here. You can see where the first six anchor lines are in the following picture (taken from the [Qt website](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html)).
 
 ![image](./images/AnchorsLines.png)
 
@@ -109,7 +106,7 @@ This is by far the most common mistake made with anchors. When you hit it, the f
 When two edges are anchored together, they touch by default. If you want to keep some space between them, use the `margins` group property: `anchors.margins` sets the same margin on every anchored edge at once, while `anchors.leftMargin`, `anchors.topMargin`, `anchors.rightMargin` and `anchors.bottomMargin` let you control each side individually.
 
 ```admonish note "Margins only apply to anchored edges"
-A margin only has an effect on an edge that is actually anchored. As the Qt documentation puts it, *"anchor margins only apply to anchors; they are not a generic means of applying margins to an Item"*. Setting `anchors.margins` on an item positioned with `x` and `y` does strictly nothing.
+A margin only has an effect on an edge that is actually anchored. As the Qt documentation puts it, *"anchor margins only apply to anchors; they are not a generic means of applying margins to an Item"*. Setting `anchors.margins` on an item positioned with `x` and `y` has no effect at all.
 ```
 
 ```qml
@@ -223,7 +220,7 @@ ApplicationWindow {
     }
 }
 ```
-This gives the same window as before, with one big difference: try resizing it. The green rectangle now follows the right edge of the window, whereas the previous version kept two fixed 200 pixel wide rectangles whatever the size of the window.
+This gives the same window as before, with one big difference: try resizing it. The green rectangle now follows the right edge of the window, whereas the previous version kept two fixed 200-pixel-wide rectangles whatever the size of the window.
 
 ````admonish tip "Grouping properties"
 When several properties belong to the same group, like the anchors we just saw, QML lets you set them either one by one with dots, or all together using braces. The following two snippets are strictly equivalent:
@@ -254,66 +251,4 @@ Because of this, anchors and absolute positioning **cannot be mixed for the same
 Pick one of the two approaches for a given dimension, and stick to it.
 ```
 
-## Column and Row
-Anchors are great to describe relationships between a few items, but they quickly become tedious when you simply want to stack a list of items one after the other. For this, QtQuick provides two simple *positioners*: **Column** and **Row**.
 
-A **Column** places its children one below the other, in the order they are declared. A **Row** does the same but places its children side by side, horizontally. Both accept a `spacing` property to control the gap between children.
-
-```qml
-import QtQuick
-import QtQuick.Controls
-
-ApplicationWindow {
-    id: root
-
-    width: 400
-    height: 400
-
-    title: "Hello World"
-    visible: true
-    color: "#202020"
-
-    Column {
-        anchors.fill: parent
-        spacing: 10
-
-        Rectangle {
-            width: 100
-            height: 100
-            color: "red"
-        }
-        Rectangle {
-            width: 100
-            height: 100
-            color: "green"
-        }
-        Rectangle {
-            width: 100
-            height: 100
-            color: "blue"
-        }
-    }
-}
-```
-
-This produces the following window:
-
-![image](./images/BasicColumn.png)
-
-**Column** and **Row** are the two simplest positioners of QtQuick, but they are not the only ones: **Grid** arranges its children in a two dimensional grid, and **Flow** places them one after the other, wrapping to a new line when it runs out of space. Everything said here applies to those two as well.
-
-```admonish warning "Do not anchor the children of a Column or a Row"
-A positioner takes care of placing its children itself, so a child must not fight it. Inside a **Column**, a child should not set its `y` position nor anchor itself vertically, which rules out `anchors.top`, `anchors.bottom`, `anchors.verticalCenter`, `anchors.fill` and `anchors.centerIn`. Inside a **Row**, the same holds for `x` and for the horizontal anchors.
-
-Anchoring the positioner **itself** is perfectly fine, as we did above with `anchors.fill: parent`. It is only its direct children that are constrained. And a child may still anchor in the *other* direction: inside a **Column**, setting `anchors.horizontalCenter` on a child is allowed and quite common.
-```
-
-```admonish note "Column/Row vs Layouts"
-Do not confuse **Column**/**Row** with **ColumnLayout**/**RowLayout** from **QtQuick.Layouts**. The positioners seen here only place their children one after the other, at the size the children already have. **Layouts**, covered in a later chapter, can additionally resize their children to make the best use of the available space. Prefer **Column**/**Row** for a simple, static list of items, and **Layouts** when items need to grow or shrink with their container.
-```
-
-```admonish tip "Time to practice"
-This is a good time to pause and experiment on your own. Take the two rectangles from the beginning of the chapter and rebuild them with a **Row** instead of `x` and `width`. Play with `spacing`, drop a **Text** inside a **Rectangle** and center it with `anchors.centerIn`, nest a **Column** inside one of the rectangles, resize the window and watch what follows and what does not.
-
-There is no single right answer here, and nothing to hand in. The goal is simply to get a feel for the three techniques and for when each of them is the comfortable one. A more complete exercise will come in a later chapter, once we have a few more tools at hand.
-```
