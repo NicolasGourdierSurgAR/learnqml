@@ -14,6 +14,7 @@
 - [The properties and property binding](./properties_and_property_binding/properties_and_property_binding.md)
     - [Signals and signal handlers](./properties_and_property_binding/signals_and_signal_handlers.md)
     - [Property binding](./properties_and_property_binding/property_binding.md)
+    - [Exercise: a color picker](./properties_and_property_binding/exercise_color_picker.md)
 - [QML Components](./qml_components/0-qml_components.md)
     - [Define a component](./qml_components/1-define_component.md)
     - [Visual vs non-visual](./qml_components/2-visual_vs_non_visual.md)
